@@ -36,6 +36,7 @@ app.get("/", function (req, res) {
 
   var day = date.toLocaleDateString("en-US", options);*/
   Item.find(function (err, founditems) {
+    try {
     if (err) {
       console.log(err);
     } else {
@@ -50,6 +51,9 @@ app.get("/", function (req, res) {
       }
 
       res.render("list", { listtitle: "Today", addlistitems: founditems });
+    }}
+    catch{
+      console.log("lodu");
     }
   });
 });
