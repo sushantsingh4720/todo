@@ -36,13 +36,16 @@ app.get("/", function (req, res) {
   Item.find(function (err, founditems) {
     if (err) {
       console.log(err);
+      res.send().json({message:err.message})
     } else {
       if (founditems.length === 0) {
         Item.insertMany(defaultitem, function (err) {
           if (err) {
+            res.send().json({message:err.message})
             console.log(err);
           } else {
             console.log("new itme added in your todolistvdatabase");
+            res.send().json({message:err.message})
           }
         });
       }
@@ -79,6 +82,7 @@ app.post("/delete", function (req, res) {
     Item.findByIdAndRemove({ _id: checkeditemid }, function (err) {
       if (err) {
         console.log(err);
+        res.send().json({message:err.message})
       } else {
         res.redirect("/");
       }
@@ -102,6 +106,7 @@ app.get("/:paramName", function (req, res) {
   List.findOne({ name: param }, function (err, findlist) {
     if (err) {
       console.log(err);
+      res.send().json({message:err.message})
     } else if (findlist) {
       res.render("list", {
         listtitle: findlist.name,
