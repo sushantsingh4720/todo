@@ -2,9 +2,11 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const { get } = require("request");
 const mongoose = require("mongoose");
-const _=require("lodash");
+const _ = require("lodash");
 
-mongoose.connect("mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb");
+mongoose.connect(
+  "mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb"
+);
 //var items = ["Electronic", "Grecery", "Beauty"];
 var workitems = [];
 const app = express();
@@ -36,16 +38,13 @@ app.get("/", function (req, res) {
   Item.find(function (err, founditems) {
     if (err) {
       console.log(err);
-      res.send().json({message:err.message})
     } else {
       if (founditems.length === 0) {
         Item.insertMany(defaultitem, function (err) {
           if (err) {
-            res.send().json({message:err.message})
             console.log(err);
           } else {
             console.log("new itme added in your todolistvdatabase");
-            res.send().json({message:err.message})
           }
         });
       }
@@ -66,39 +65,35 @@ app.post("/", function (req, res) {
     itemname.save();
     res.redirect("/");
   } else {
-   List.findOne({name:listitem},function(err,foundlist){
-     foundlist.clist.push(itemname);
-     foundlist.save();
-     res.redirect("/"+listitem);
-   })
-
-
+    List.findOne({ name: listitem }, function (err, foundlist) {
+      foundlist.clist.push(itemname);
+      foundlist.save();
+      res.redirect("/" + listitem);
+    });
   }
 });
 app.post("/delete", function (req, res) {
   const checkeditemid = req.body.selectitems;
-  const listName=req.body.listName;
-  if(listName==="Today"){
+  const listName = req.body.listName;
+  if (listName === "Today") {
     Item.findByIdAndRemove({ _id: checkeditemid }, function (err) {
       if (err) {
         console.log(err);
-        res.send().json({message:err.message})
       } else {
         res.redirect("/");
       }
     });
+  } else {
+    List.findOneAndUpdate(
+      { name: listName },
+      { $pull: { clist: { _id: checkeditemid } } },
+      function (err, foundlist) {
+        if (!err) {
+          res.redirect("/" + listName);
+        }
+      }
+    );
   }
-  else{
-
-  }
-List.findOneAndUpdate({name:listName},{$pull:{clist:{_id:checkeditemid}}},function(err,foundlist){
-  if(!err){
-    res.redirect("/"+listName);
-  }
-});
-
-
-  
 });
 
 app.get("/:paramName", function (req, res) {
@@ -106,7 +101,6 @@ app.get("/:paramName", function (req, res) {
   List.findOne({ name: param }, function (err, findlist) {
     if (err) {
       console.log(err);
-      res.send().json({message:err.message})
     } else if (findlist) {
       res.render("list", {
         listtitle: findlist.name,
@@ -127,6 +121,6 @@ app.get("/about", function (re, res) {
   res.render("about");
 });
 
-app.listen(process.env.PORT||3000, function (req, res) {
+app.listen(process.env.PORT || 3000, function (req, res) {
   console.log("your web port on 3000");
 });
