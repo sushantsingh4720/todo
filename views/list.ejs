@@ -1,0 +1,45 @@
+<%- include("header") -%>
+    <div class="total">
+        <div>
+
+            <h1 style="color:blue;margin-left: 5%;">
+                <%= listtitle %>
+            </h1>
+
+
+        </div>
+
+
+
+        
+            <div>
+
+
+
+                <% addlistitems.forEach(function(items){ %>
+                    <form class="form" action="/delete" method="post">
+
+                    <div>
+                        <input type="checkbox" name="selectitems" value="<%=items._id%>" onChange="this.form.submit()">
+                        <h2>
+                            <%= items.name %>
+                        </h2>
+                    </div>
+                    <input type="hidden" name="listName" value="<%=listtitle%>"></input>
+                </form>
+                    <%})%>
+
+
+            </div>
+        
+
+
+        <div>
+            <form class="form" action="/" method="post">
+                <input type="text" name="newitem" placeholder="Add your fevorite" required>
+                <button type="submit" name="list" value=<%=listtitle %>>Add</button>
+               
+            </form>
+        </div>
+    </div>
+    <%- include("footer")-%>
