@@ -4,6 +4,7 @@ const { get } = require("request");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const http = require("http");
+const app = express();
 const server = http.createServer(app);
 
 mongoose.connect(
@@ -11,7 +12,6 @@ mongoose.connect(
 );
 //var items = ["Electronic", "Grecery", "Beauty"];
 var workitems = [];
-const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
