@@ -3,9 +3,9 @@ const express = require("express");
 const { get } = require("request");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-const http = require("http");
+// const http = require("http");
 const app = express();
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
 mongoose.connect("mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb",function (){
   console.log("DB connected");
