@@ -19,7 +19,7 @@
                 <% addlistitems.forEach(function(items){ %>
                     <form class="form" action="/delete" method="post">
 
-                    <div>
+                    <div style="display: flex; align-items:center">
                         <input type="checkbox" name="selectitems" value="<%=items._id%>" onChange="this.form.submit()">
                         <h2>
                             <%= items.name %>
