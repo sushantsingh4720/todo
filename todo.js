@@ -7,10 +7,11 @@ const _ = require("lodash");
 const app = express();
 // const server = http.createServer(app);
 
-mongoose.connect("mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb",function (){
+mongoose.connect("mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb",function (err){
+  if(err)console.log(err);
   console.log("DB connected");
 });
-//var items = ["Electronic", "Grecery", "Beauty"];
+//var items = ["Electronic", "Grecery", "Beau ty"];
 var workitems = [];
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
