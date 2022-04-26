@@ -7,9 +7,9 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 
-mongoose.connect(
-  "mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb"
-);
+mongoose.connect("mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb",function (){
+  console.log("DB connected");
+});
 //var items = ["Electronic", "Grecery", "Beauty"];
 var workitems = [];
 app.use(bodyParser.urlencoded({ extended: true }));
