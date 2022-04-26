@@ -3,6 +3,7 @@ const express = require("express");
 const { get } = require("request");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const server = http.createServer(app);
 
 mongoose.connect(
   "mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb"
@@ -36,7 +37,7 @@ app.get("/", function (req, res) {
 
   var day = date.toLocaleDateString("en-US", options);*/
   Item.find(function (err, founditems) {
-    try {
+    
     if (err) {
       console.log(err);
     } else {
@@ -51,10 +52,8 @@ app.get("/", function (req, res) {
       }
 
       res.render("list", { listtitle: "Today", addlistitems: founditems });
-    }}
-    catch{
-      console.log("lodu");
     }
+   
   });
 });
 app.post("/", function (req, res) {
