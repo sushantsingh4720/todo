@@ -1,8 +1,8 @@
 <%- include("header") -%>
-    <div class="total">
+    <div class="total" style="margin-left:30%; align-items: center;">
         <div>
 
-            <h1 style="color:blue;margin-left: 5%;">
+            <h1 style="color:blue;margin-right: 50%; text-align: center;">
                 <%= listtitle %>
             </h1>
 
@@ -17,7 +17,7 @@
 
 
                 <% addlistitems.forEach(function(items){ %>
-                    <form class="form" action="/delete" method="post">
+                    <form class="form" action="/delete" method="post" style="align-items: center; margin-left: auto; padding-left: 10px;">
 
                     <div style="display: flex; align-items:center">
                         <input type="checkbox" name="selectitems" value="<%=items._id%>" onChange="this.form.submit()">
@@ -36,8 +36,8 @@
 
         <div>
             <form class="form" action="/" method="post">
-                <input type="text" name="newitem" placeholder="Add your fevorite" required>
-                <button type="submit" name="list" value=<%=listtitle %>>Add</button>
+                <input type="text" name="newitem" placeholder="Add your favourite" required>
+                <button class="btn btn-primary" type="submit" name="list" value=<%=listtitle %>>Add</button>
                
             </form>
         </div>
