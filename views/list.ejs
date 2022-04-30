@@ -2,43 +2,33 @@
     <div class="total" style="margin-left:30%; align-items: center;">
         <div>
 
-            <h1 style="color:blue;margin-right: 50%; text-align: center;">
+            <h1 style="color:rgb(32, 38, 0);margin-right: 50%; text-align: center; font-weight: 900; font-size: 4rem;">
                 <%= listtitle %>
             </h1>
-
-
         </div>
+        <div>
+            <% addlistitems.forEach(function(items){ %>
+                <form class="form" action="/delete" method="post"
+                    style="align-items: center; margin-left: auto; padding-left: 10px;">
 
-
-
-        
-            <div>
-
-
-
-                <% addlistitems.forEach(function(items){ %>
-                    <form class="form" action="/delete" method="post" style="align-items: center; margin-left: auto; padding-left: 10px;">
-
-                    <div style="display: flex; align-items:center">
-                        <input type="checkbox" name="selectitems" value="<%=items._id%>" onChange="this.form.submit()">
-                        <h2>
+                    <div style="display: flex; align-items:center" class="items">
+                        <input style="margin-left:2rem; width: 2rem; height: 2rem;" type="checkbox" name="selectitems"
+                            value="<%=items._id%>" onChange="this.form.submit()">
+                        <h2 style="padding-left: 2rem; padding-bottom: 1rem;">
                             <%= items.name %>
                         </h2>
                     </div>
                     <input type="hidden" name="listName" value="<%=listtitle%>"></input>
                 </form>
-                    <%})%>
-
-
-            </div>
-        
-
+                <%})%>
+        </div>
 
         <div>
-            <form class="form" action="/" method="post">
-                <input type="text" name="newitem" placeholder="Add your favourite" required>
+            <form class="form" action="/" method="post" style="background-color: rgb(110, 187, 110);">
+                <input style="height: 3rem; padding-left:1rem;" type="text" name="newitem"
+                    placeholder="Add your favourite" required>
                 <button class="btn btn-primary" type="submit" name="list" value=<%=listtitle %>>Add</button>
-               
+
             </form>
         </div>
     </div>
