@@ -7,10 +7,13 @@ const _ = require("lodash");
 const app = express();
 // const server = http.createServer(app);
 
-mongoose.connect("mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb",function (err){
-  if(err)console.log(err);
-  console.log("DB connected");
-});
+mongoose.connect(
+  "mongodb+srv://admin-sushant:singhsushant123@cluster0.qfvw8.mongodb.net/Todolistdb",
+  function (err) {
+    if (err) console.log(err);
+    console.log("DB connected");
+  }
+);
 //var items = ["Electronic", "Grecery", "Beau ty"];
 var workitems = [];
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +29,7 @@ const item1 = new Item({
 const item2 = new Item({
   name: "rice",
 });
-const defaultitem = [item1, item2];
+const defaultitem = [];
 const customSchema = mongoose.Schema({
   name: String,
   clist: [itemSchema],
@@ -39,7 +42,6 @@ app.get("/", function (req, res) {
 
   var day = date.toLocaleDateString("en-US", options);*/
   Item.find(function (err, founditems) {
-    
     if (err) {
       console.log(err);
     } else {
@@ -55,7 +57,6 @@ app.get("/", function (req, res) {
 
       res.render("list", { listtitle: "Today", addlistitems: founditems });
     }
-   
   });
 });
 app.post("/", function (req, res) {
@@ -129,6 +130,10 @@ app.get("/about", function (re, res) {
 /*app.listen(process.env.PORT || 3000, function (req, res) {
   console.log("your web port on 3000");
 });*/
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+app.listen(process.env.PORT || 3000, function () {
+  console.log(
+    "Express server listening on port %d in %s mode",
+    this.address().port,
+    app.settings.env
+  );
 });
